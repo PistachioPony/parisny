@@ -3,7 +3,7 @@
 
 :root {
   --paper: #f3efe7;
-  --ink:   #080707;
+  --ink:   #2a2724;   /* warm near-black: 12.95:1 on paper */
   --quiet: #57524b;   /* dates: 6.75:1 on paper */
 }
 
