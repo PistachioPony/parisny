@@ -1,0 +1,60 @@
+/* Type: Times New Roman, Maybelle's own font, already on readers' devices.
+   No font files to load, and nothing sent to Google. */
+
+:root {
+  --paper: #f3efe7;
+  --ink:   #080707;
+  --quiet: #57524b;   /* dates: 6.75:1 on paper */
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+header, main {
+  max-width: 34rem;           /* about 65 characters a line */
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 4rem 0 5rem;
+}
+
+article {
+  margin-bottom: 6rem;        /* room between letters */
+}
+
+time {
+  display: block;
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.06em;
+  color: var(--quiet);
+  margin-bottom: 1rem;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+p { margin: 0; }
+p + p { text-indent: 1.5em; }  /* book-style paragraphs */
+
+/* Drawings sent on the same day sit side by side */
+.pair-images {
+  display: grid;
+  grid-auto-flow: column;   /* every drawing of the day in one row */
+  grid-auto-columns: 1fr;   /* equal widths */
+  gap: 0.75rem;
+  align-items: start;
+}
