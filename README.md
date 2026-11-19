@@ -7,9 +7,12 @@ one letter answering the last, bound into a single scrolling book.
 
 1. Download the new piece(s) from Drive into `inbox/`
    (Maybelle's letter: File → Download → Markdown).
-2. Run `node bind.js` and answer the date questions.
-3. Open `docs/index.html` in a browser to check it.
-4. Commit and push. The site updates in a minute or two.
+2. Run `node inbox.js` and answer the date questions (Enter = today).
+   Drawings come out upright, 2000px on the long side, with no GPS or
+   other metadata. Originals move to `inbox/done/`.
+3. Run `node bind.js`.
+4. Open `docs/index.html` in a browser to check it.
+5. Commit and push. The site updates in a minute or two.
 
 ## Layout
 

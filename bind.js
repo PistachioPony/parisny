@@ -29,6 +29,15 @@ function escapeHtml(text) {
   return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
+// The Markdown emphasis Google Docs writes: **bold** and *italics*.
+// Runs after escapeHtml, so the only markup that gets through is ours.
+// Bold goes first, or *italics* would eat the inner stars of **bold**.
+function emphasis(text) {
+  return text
+    .replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/\*([^*\n]+)\*/g, "<em>$1</em>");
+}
+
 // One file in pages/  ->  one <article> in the book
 function bindPage(file) {
   const [, year, month, day, ext] = file.match(PAGE_NAME);
@@ -50,7 +59,7 @@ function bindPage(file) {
     .split(/\n\s*\n/)
     .map((p) => p.trim())
     .filter(Boolean)
-    .map((p) => `  <p>${escapeHtml(p)}</p>`);
+    .map((p) => `  <p>${emphasis(escapeHtml(p))}</p>`);
 
   return [`<article class="passage">`, `  ${time}`, ...paragraphs, `</article>`].join("\n");
 }
@@ -101,6 +110,10 @@ const book = template.replace("<!-- CHAIN -->", () => chain);
 // 5. Build docs/ fresh: wipe it, then write everything again
 fs.rmSync(DOCS, { recursive: true, force: true });
 fs.mkdirSync(path.join(DOCS, "pages"), { recursive: true });
+
+// Tell GitHub Pages to serve docs/ as-is, without running it through Jekyll.
+// Written on every build, because the wipe above deletes it.
+fs.writeFileSync(path.join(DOCS, ".nojekyll"), "");
 
 fs.writeFileSync(path.join(DOCS, "index.html"), book);
 fs.copyFileSync(path.join(TEMPLATE, "style.css"), path.join(DOCS, "style.css"));
